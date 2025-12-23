@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NEER SOS MVP</title>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+  <!-- Google Maps -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY"></script>
+
+  <style>
+    body { font-family: Arial; text-align: center; }
+    #map { height: 400px; width: 100%; margin-top: 10px; }
+    button { padding: 15px 30px; font-size: 18px; background: red; color: white; border: none; }
+  </style>
+</head>
+
+<body>
+  <h2>NEER – SOS MVP</h2>
+  <button onclick="sendSOS()">SEND SOS</button>
+  <div id="map"></div>
+<script>
+  var firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "neer-band.firebaseapp.com",
+    databaseURL: "https://neer-band-default-rtdb.firebaseio.com",
+    projectId: "neer-band",
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  var database = firebase.database();
+
+  function sendSOS() {
+    navigator.geolocation.getCurrentPosition(position => {
+      let lat = position.coords.latitude;
+      let lng = position.coords.longitude;
+
+      database.ref("sos").set({
+        latitude: lat,
+        longitude: lng,
+        time: new Date().toString(),
+        status: "SOS_TRIGGERED"
+      });
+
+      alert("SOS Sent! Location logged.");
+    });
+  }
+</script>
+
+</body>
+</html>
