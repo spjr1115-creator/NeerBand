@@ -1,6 +1,5 @@
 # 🚨 NEER – SOS MVP
-
-> One Touch Can Save a Life
+>Firebase is used for real-time database, authentication, and hosting. The project is connected to Firebase through the frontend code.
 
 A simple and panic-friendly **women safety SOS system** that logs real-time emergency location data using **Google Firebase**.
 
